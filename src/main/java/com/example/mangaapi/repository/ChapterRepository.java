@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.mangaapi.entity.Chapter;
 
-public interface ChapterRepository extends JpaRepository<Long, Chapter> {
+public interface ChapterRepository extends JpaRepository<Chapter, Long> {
 
 }

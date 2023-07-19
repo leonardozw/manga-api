@@ -29,6 +29,7 @@ public class Manga {
 
     private String status;
     private Date dateReleased;
+    private Date dateAdded;
 
     @ElementCollection
     @CollectionTable(name = "manga_covers", joinColumns = @JoinColumn(name = "manga_id"))
@@ -94,6 +95,14 @@ public class Manga {
 
     public void setDateReleased(Date dateReleased) {
         this.dateReleased = dateReleased;
+    }
+
+    public Date getDateAdded() {
+        return dateAdded;
+    }
+
+    public void setDateAdded(Date dateAdded) {
+        this.dateAdded = dateAdded;
     }
 
     public List<String> getCovers() {
