@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.mangaapi.entity.Manga;
+import com.example.mangaapi.entity.Volume;
 import com.example.mangaapi.service.MangaService;
 
 import jakarta.validation.Valid;
@@ -32,6 +33,12 @@ public class MangaController {
     public ResponseEntity<Manga> create(@RequestBody @Valid Manga manga) {
         Manga mangaCreated = mangaService.create(manga);
         return ResponseEntity.status(HttpStatus.CREATED).body(mangaCreated);
+    }
+
+    @PostMapping("/{id}/add")
+    public ResponseEntity<Manga> addVolume(@PathVariable("id") Long id, @RequestBody Volume volume) {
+        Manga mangaUpdated = mangaService.addVolume(id, volume);
+        return ResponseEntity.ok(mangaUpdated);
     }
 
     @GetMapping

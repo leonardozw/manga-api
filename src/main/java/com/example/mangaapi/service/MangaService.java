@@ -7,6 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.mangaapi.entity.Manga;
+import com.example.mangaapi.entity.Volume;
 import com.example.mangaapi.repository.MangaRepository;
 
 @Service
@@ -27,6 +28,10 @@ public class MangaService {
         return mangaRepository.findAll(sort);
     }
 
+    public Optional<Manga> getById(Long id) {
+        return mangaRepository.findById(id);
+    }
+
     public Optional<Manga> getByName(String name) {
         return mangaRepository.findByName(name);
     }
@@ -38,5 +43,13 @@ public class MangaService {
     public List<Manga> delete(Long id) {
         mangaRepository.deleteById(id);
         return list();
+    }
+
+    public Manga addVolume(Long id, Volume volume) {
+        Optional<Manga> optManga = mangaRepository.findById(id);
+        Manga manga = optManga.get();
+        volume.setManga(manga);
+        manga.getVolumes().add(0, volume);
+        return mangaRepository.save(manga);
     }
 }
