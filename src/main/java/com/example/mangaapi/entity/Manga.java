@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "mangas")
@@ -21,15 +22,22 @@ public class Manga {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank
     private String name;
+    @NotBlank
     private String description;
 
     @OneToMany(mappedBy = "manga", cascade = CascadeType.ALL)
     private List<Volume> volumes;
 
+    @NotBlank
     private String status;
+    @NotBlank
     private String author;
+    @NotBlank
     private String publisher;
+
     private Date dateReleased;
     private Date dateAdded;
 

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.mangaapi.entity.Manga;
 import com.example.mangaapi.service.MangaService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/mangas")
 public class MangaController {
@@ -25,7 +27,7 @@ public class MangaController {
     }
 
     @PostMapping
-    Manga create(@RequestBody Manga manga) {
+    Manga create(@RequestBody @Valid Manga manga) {
         return mangaService.create(manga);
     }
 
