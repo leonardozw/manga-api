@@ -1,6 +1,7 @@
 package com.example.mangaapi.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,10 @@ public class MangaService {
     public List<Manga> list() {
         Sort sort = Sort.by("dateAdded").descending().and(Sort.by("name").ascending());
         return mangaRepository.findAll(sort);
+    }
+
+    public Optional<Manga> getByName(String name) {
+        return mangaRepository.findByName(name);
     }
 
     public Manga update(Manga manga) {

@@ -40,6 +40,12 @@ public class MangaController {
         return ResponseEntity.ok(mangas);
     }
 
+    @GetMapping("/name/{name}")
+    public ResponseEntity<Manga> getByName(@PathVariable("name") String name) {
+        return mangaService.getByName(name).map(manga -> ResponseEntity.ok(manga))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
     @PutMapping
     public ResponseEntity<Manga> update(@RequestBody Manga manga) {
         Manga updatedManga = mangaService.update(manga);

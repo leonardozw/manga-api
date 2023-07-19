@@ -3,6 +3,8 @@ package com.example.mangaapi.entity;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
@@ -140,6 +142,11 @@ public class Manga {
 
     public void setCovers(List<String> covers) {
         this.covers = covers;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return EqualsBuilder.reflectionEquals(obj, this);
     }
 
 }
