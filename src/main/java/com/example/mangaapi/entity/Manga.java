@@ -25,7 +25,7 @@ public class Manga {
     private String description;
 
     @OneToMany(mappedBy = "manga", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Volume volumes;
+    private List<Volume> volumes;
 
     private String status;
     private Date dateReleased;
@@ -39,13 +39,15 @@ public class Manga {
     public Manga() {
     }
 
-    public Manga(String name, String description, Volume volumes, String status, Date dateReleased,
-            List<String> covers) {
+    public Manga(Long id, String name, String description, List<Volume> volumes, String status, Date dateReleased,
+            Date dateAdded, List<String> covers) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.volumes = volumes;
         this.status = status;
         this.dateReleased = dateReleased;
+        this.dateAdded = dateAdded;
         Covers = covers;
     }
 
@@ -73,11 +75,11 @@ public class Manga {
         this.description = description;
     }
 
-    public Volume getVolumes() {
+    public List<Volume> getVolumes() {
         return volumes;
     }
 
-    public void setVolumes(Volume volumes) {
+    public void setVolumes(List<Volume> volumes) {
         this.volumes = volumes;
     }
 
