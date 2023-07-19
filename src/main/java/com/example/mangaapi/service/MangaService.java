@@ -22,7 +22,7 @@ public class MangaService {
     }
 
     public List<Manga> list() {
-        Sort sort = Sort.by("dateAdded").descending().and(Sort.by("nome").ascending());
+        Sort sort = Sort.by("dateAdded").descending().and(Sort.by("name").ascending());
         return mangaRepository.findAll(sort);
     }
 

@@ -1,0 +1,42 @@
+### Create Manga ###
+POST http://localhost:8080/mangas
+Content-Type: application/json
+
+{
+    "name": "Nome do Manga",
+    "description": "Descrição do Manga 2",
+    "status": "Status do Manga 2",
+    "author": "Autor do Manga 2",
+    "publisher": "Editora do Manga 2",
+    "dateReleased": "2022-07-01",
+    "dateAdded": "2022-07-10",
+    "volumes": null,
+    "covers": null
+}
+
+### List Mangas ###
+GET http://localhost:8080/mangas
+
+### Put Manga ###
+PUT http://localhost:8080/mangas
+Content-Type: application/json
+
+{
+    "id": 1,
+    "name": "Novo nome do Manga",
+    "description": "Nova descrição do Manga",
+    "status": "Novo status do Manga",
+    "author": "Novo autor do Manga",
+    "publisher": "Nova editora do Manga",
+    "dateReleased": "2022-07-01",
+    "dateAdded": "2022-07-10",
+    "volumes": null,
+    "covers": null
+}
+
+### Delete Manga ###
+DELETE http://localhost:8080/mangas/2
+
+
+
+

@@ -39,7 +39,7 @@ public class MangaController {
         return mangaService.update(manga);
     }
 
-    @DeleteMapping
+    @DeleteMapping("{id}")
     List<Manga> delete(@PathVariable("id") Long id) {
         return mangaService.delete(id);
     }

@@ -24,31 +24,34 @@ public class Manga {
     private String name;
     private String description;
 
-    @OneToMany(mappedBy = "manga", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "manga", cascade = CascadeType.ALL)
     private List<Volume> volumes;
 
     private String status;
+    private String author;
+    private String publisher;
     private Date dateReleased;
     private Date dateAdded;
 
     @ElementCollection
     @CollectionTable(name = "manga_covers", joinColumns = @JoinColumn(name = "manga_id"))
     @Column(name = "cover")
-    private List<String> Covers;
+    private List<String> covers;
 
     public Manga() {
     }
 
-    public Manga(Long id, String name, String description, List<Volume> volumes, String status, Date dateReleased,
-            Date dateAdded, List<String> covers) {
-        this.id = id;
+    public Manga(String name, String description, List<Volume> volumes, String status, String author, String publisher,
+            Date dateReleased, Date dateAdded, List<String> covers) {
         this.name = name;
         this.description = description;
         this.volumes = volumes;
         this.status = status;
+        this.author = author;
+        this.publisher = publisher;
         this.dateReleased = dateReleased;
         this.dateAdded = dateAdded;
-        Covers = covers;
+        this.covers = covers;
     }
 
     public Long getId() {
@@ -91,6 +94,22 @@ public class Manga {
         this.status = status;
     }
 
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
     public Date getDateReleased() {
         return dateReleased;
     }
@@ -108,11 +127,11 @@ public class Manga {
     }
 
     public List<String> getCovers() {
-        return Covers;
+        return covers;
     }
 
     public void setCovers(List<String> covers) {
-        Covers = covers;
+        this.covers = covers;
     }
 
 }
