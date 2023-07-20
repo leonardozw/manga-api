@@ -80,6 +80,18 @@ public class Manga {
         this.covers = covers;
     }
 
+    public Manga(Long id, @NotBlank String name, @NotBlank String description, @NotBlank String status,
+            @NotBlank String author, @NotBlank String publisher, Date dateReleased, Date dateAdded) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.status = status;
+        this.author = author;
+        this.publisher = publisher;
+        this.dateReleased = dateReleased;
+        this.dateAdded = dateAdded;
+    }
+
     public Long getId() {
         return id;
     }

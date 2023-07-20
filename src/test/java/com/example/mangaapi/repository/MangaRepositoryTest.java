@@ -2,11 +2,17 @@ package com.example.mangaapi.repository;
 
 import static com.example.mangaapi.common.MangaConstants.*;
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import com.example.mangaapi.entity.Manga;
 
@@ -17,6 +23,11 @@ public class MangaRepositoryTest {
 
     @Autowired
     private TestEntityManager testEntityManager;
+
+    @AfterEach
+    public void afterEach() {
+        MANGA_ONE.setId(null);
+    }
 
     @Test
     public void createManga_WithValidData_ReturnsManga() {
@@ -52,5 +63,81 @@ public class MangaRepositoryTest {
         manga.setId(null);
 
         assertThatThrownBy(() -> mangaRepository.save(manga)).isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    public void getManga_ByExistingId_ReturnsManga() {
+        Manga manga = testEntityManager.persistAndFlush(MANGA_ONE);
+
+        Optional<Manga> mangaOpt = mangaRepository.findById(manga.getId());
+
+        assertThat(mangaOpt).isNotEmpty();
+        assertThat(mangaOpt.get()).isEqualTo(manga);
+    }
+
+    @Test
+    public void getManga_ByUnexistingId_ReturnsEmpty() {
+        Optional<Manga> mangaOpt = mangaRepository.findById(1L);
+
+        assertThat(mangaOpt).isEmpty();
+    }
+
+    @Test
+    public void getManga_ByExistingName_ReturnsManga() {
+        Manga manga = testEntityManager.persistAndFlush(MANGA_ONE);
+
+        Optional<Manga> mangaOpt = mangaRepository.findByName(manga.getName());
+
+        assertThat(mangaOpt).isNotEmpty();
+        assertThat(mangaOpt.get()).isEqualTo(manga);
+    }
+
+    @Test
+    public void getManga_ByUnexistingName_ReturnsEmpty() {
+        Optional<Manga> mangaOpt = mangaRepository.findByName("name");
+
+        assertThat(mangaOpt).isEmpty();
+    }
+
+    @Test
+    public void listMangas_ReturnsMangas() {
+        Manga mangaOne = testEntityManager.persistAndFlush(MANGA_ONE);
+        Manga mangaTwo = testEntityManager.persistAndFlush(MANGA_TWO);
+
+        List<Manga> mangas = mangaRepository.findAll();
+
+        assertThat(mangas).isNotEmpty();
+        assertThat(mangas).hasSize(2);
+    }
+
+    @Test
+    public void listMagas_ReturnsNoPlanets() {
+        List<Manga> mangas = mangaRepository.findAll();
+
+        assertThat(mangas).isEmpty();
+    }
+
+    @Test
+    public void removeManga_WithExistingId_RemovesMangaFromDatabase() {
+        Manga manga = testEntityManager.persistAndFlush(MANGA_ONE);
+
+        mangaRepository.deleteById(manga.getId());
+
+        Manga removedManga = testEntityManager.find(Manga.class, manga.getId());
+
+        assertThat(removedManga).isNull();
+    }
+
+    @Test
+    public void removeManga_WithUnexistingId_ThrowsException() {
+        Long id = 1L;
+
+        Optional<Manga> manga = mangaRepository.findById(id);
+
+        if (manga == null) {
+            assertThrows(EmptyResultDataAccessException.class, () -> {
+                mangaRepository.deleteById(id);
+            });
+        }
     }
 }
