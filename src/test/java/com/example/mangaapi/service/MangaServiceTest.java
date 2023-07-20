@@ -155,4 +155,15 @@ public class MangaServiceTest {
         when(mangaRepository.findById(1L)).thenThrow(RuntimeException.class);
         assertThatThrownBy(() -> mangaService.addVolume(1L, VOLUME_ONE)).isInstanceOf(RuntimeException.class);
     }
+
+    @Test
+    public void removeManga_WithExistingId_doesNotThrowAnyException() {
+        assertThatCode(() -> mangaService.delete(1L)).doesNotThrowAnyException();
+    }
+
+    @Test
+    public void removeManga_WithUnexistingId_ThrowsException() {
+        doThrow(new RuntimeException()).when(mangaRepository).deleteById(99L);
+        assertThatThrownBy(() -> mangaService.delete(99L)).isInstanceOf(RuntimeException.class);
+    }
 }
