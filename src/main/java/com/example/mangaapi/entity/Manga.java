@@ -26,6 +26,7 @@ public class Manga {
     private Long id;
 
     @NotBlank
+    @Column(unique = true)
     private String name;
     @NotBlank
     private String description;
