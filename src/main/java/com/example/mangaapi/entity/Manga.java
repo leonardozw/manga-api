@@ -1,6 +1,6 @@
 package com.example.mangaapi.entity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -17,6 +17,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "mangas")
@@ -25,24 +26,24 @@ public class Manga {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotEmpty
     @Column(unique = true)
     private String name;
-    @NotBlank
+    @NotEmpty
     private String description;
 
     @OneToMany(mappedBy = "manga", cascade = CascadeType.ALL)
     private List<Volume> volumes;
 
-    @NotBlank
+    @NotEmpty
     private String status;
-    @NotBlank
+    @NotEmpty
     private String author;
-    @NotBlank
+    @NotEmpty
     private String publisher;
 
-    private Date dateReleased;
-    private Date dateAdded;
+    private LocalDateTime dateReleased;
+    private LocalDateTime dateAdded;
 
     @ElementCollection
     @CollectionTable(name = "manga_covers", joinColumns = @JoinColumn(name = "manga_id"))
@@ -53,8 +54,8 @@ public class Manga {
     }
 
     public Manga(Long id, @NotBlank String name, @NotBlank String description, List<Volume> volumes,
-            @NotBlank String status, @NotBlank String author, @NotBlank String publisher, Date dateReleased,
-            Date dateAdded, List<String> covers) {
+            @NotBlank String status, @NotBlank String author, @NotBlank String publisher, LocalDateTime dateReleased,
+            LocalDateTime dateAdded, List<String> covers) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -67,8 +68,9 @@ public class Manga {
         this.covers = covers;
     }
 
-    public Manga(String name, String description, List<Volume> volumes, String status, String author, String publisher,
-            Date dateReleased, Date dateAdded, List<String> covers) {
+    public Manga(@NotBlank String name, @NotBlank String description, List<Volume> volumes, @NotBlank String status,
+            @NotBlank String author, @NotBlank String publisher, LocalDateTime dateReleased, LocalDateTime dateAdded,
+            List<String> covers) {
         this.name = name;
         this.description = description;
         this.volumes = volumes;
@@ -78,18 +80,6 @@ public class Manga {
         this.dateReleased = dateReleased;
         this.dateAdded = dateAdded;
         this.covers = covers;
-    }
-
-    public Manga(Long id, @NotBlank String name, @NotBlank String description, @NotBlank String status,
-            @NotBlank String author, @NotBlank String publisher, Date dateReleased, Date dateAdded) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.status = status;
-        this.author = author;
-        this.publisher = publisher;
-        this.dateReleased = dateReleased;
-        this.dateAdded = dateAdded;
     }
 
     public Long getId() {
@@ -148,19 +138,19 @@ public class Manga {
         this.publisher = publisher;
     }
 
-    public Date getDateReleased() {
+    public LocalDateTime getDateReleased() {
         return dateReleased;
     }
 
-    public void setDateReleased(Date dateReleased) {
+    public void setDateReleased(LocalDateTime dateReleased) {
         this.dateReleased = dateReleased;
     }
 
-    public Date getDateAdded() {
+    public LocalDateTime getDateAdded() {
         return dateAdded;
     }
 
-    public void setDateAdded(Date dateAdded) {
+    public void setDateAdded(LocalDateTime dateAdded) {
         this.dateAdded = dateAdded;
     }
 

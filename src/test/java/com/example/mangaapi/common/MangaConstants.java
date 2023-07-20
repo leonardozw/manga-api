@@ -1,14 +1,18 @@
 package com.example.mangaapi.common;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import com.example.mangaapi.entity.Manga;
 import com.example.mangaapi.entity.Volume;
 
 public class MangaConstants {
+
+        public static final LocalDateTime DATE_ONE = LocalDateTime.of(2023, 7, 1, 12, 0);
+        public static final LocalDateTime DATE_TWO = LocalDateTime.of(2023, 8, 15, 15, 30);
+
         public static final Manga MANGA_ONE = new Manga(
                         "Manga One",
                         "Description One",
@@ -16,8 +20,8 @@ public class MangaConstants {
                         "Ongoing",
                         "Author One",
                         "Publisher One",
-                        new Date(),
-                        new Date(),
+                        DATE_ONE,
+                        DATE_TWO,
                         null);
         public static final Manga MANGA_TWO = new Manga(
                         "Manga Two",
@@ -26,8 +30,8 @@ public class MangaConstants {
                         "Ongoing",
                         "Author Two",
                         "Publisher Two",
-                        new Date(),
-                        new Date(),
+                        DATE_ONE,
+                        DATE_TWO,
                         null);
         public static final Manga UPDATE_MANGA = new Manga(
                         1L,

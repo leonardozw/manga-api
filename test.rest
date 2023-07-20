@@ -8,8 +8,8 @@ Content-Type: application/json
     "status": "Status do Manga 2",
     "author": "Autor do Manga 2",
     "publisher": "Editora do Manga 2",
-    "dateReleased": "2022-07-01",
-    "dateAdded": "2022-07-10",
+    "dateReleased": "2023-07-20T14:45:39.693689",
+    "dateAdded": "2023-07-20T14:45:39.693689",
     "volumes": null,
     "covers": null
 }
@@ -22,20 +22,20 @@ PUT http://localhost:8080/mangas
 Content-Type: application/json
 
 {
-    "id": 1,
+    "id": 3,
     "name": "Novo nome do Manga",
     "description": "Nova descrição do Manga",
     "status": "Novo status do Manga",
     "author": "Novo autor do Manga",
     "publisher": "Nova editora do Manga",
-    "dateReleased": "2022-07-01",
-    "dateAdded": "2022-07-10",
+    "dateReleased": "2023-07-20T14:45:39.693689",
+    "dateAdded": "2023-07-20T14:45:39.693689",
     "volumes": null,
     "covers": null
 }
 
 ### Delete Manga ###
-DELETE http://localhost:8080/mangas/2
+DELETE http://localhost:8080/mangas/1
 
 
 
