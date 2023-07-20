@@ -134,4 +134,25 @@ public class MangaServiceTest {
         assertThatThrownBy(() -> mangaService.update(updatedManga)).isInstanceOf(RuntimeException.class);
     }
 
+    @Test
+    public void addVolume_WithValidArguments_ReturnsManga() {
+        Manga manga = MANGA_ONE;
+
+        when(mangaRepository.save(manga)).thenReturn(manga);
+
+        mangaService.create(manga);
+
+        when(mangaRepository.findById(1L)).thenReturn(Optional.of(manga));
+
+        Manga sut = mangaService.addVolume(1L, VOLUME_ONE);
+
+        assertThat(sut).isNotNull();
+        assertThat(sut.getVolumes()).isEqualTo(manga.getVolumes());
+    }
+
+    @Test
+    public void addVolume_WithoutExistingManga_ThrowsException() {
+        when(mangaRepository.findById(1L)).thenThrow(RuntimeException.class);
+        assertThatThrownBy(() -> mangaService.addVolume(1L, VOLUME_ONE)).isInstanceOf(RuntimeException.class);
+    }
 }

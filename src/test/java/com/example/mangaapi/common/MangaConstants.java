@@ -1,5 +1,6 @@
 package com.example.mangaapi.common;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -11,7 +12,7 @@ public class MangaConstants {
         public static final Manga MANGA_ONE = new Manga(
                         "Manga One",
                         "Description One",
-                        null,
+                        new ArrayList<>(),
                         "Ongoing",
                         "Author One",
                         "Publisher One",
@@ -21,7 +22,7 @@ public class MangaConstants {
         public static final Manga MANGA_TWO = new Manga(
                         "Manga Two",
                         "Description Two",
-                        null,
+                        new ArrayList<>(),
                         "Ongoing",
                         "Author Two",
                         "Publisher Two",
@@ -32,7 +33,7 @@ public class MangaConstants {
                         1L,
                         "One Piece",
                         "Adventure",
-                        null,
+                        new ArrayList<>(),
                         "ongoing",
                         "Eiichiro Oda",
                         "Shonen Jump",
@@ -57,5 +58,4 @@ public class MangaConstants {
                         null,
                         null,
                         "Volume One Cover");
-
 }

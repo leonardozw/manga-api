@@ -11,6 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "volumes")
@@ -18,6 +19,7 @@ public class Volume {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank
     private int issue;
 
     @ManyToOne
@@ -76,6 +78,12 @@ public class Volume {
 
     public void setCover(String cover) {
         this.cover = cover;
+    }
+
+    @Override
+    public String toString() {
+        return "Volume [id=" + id + ", issue=" + issue + ", manga=" + manga + ", chapters=" + chapters + ", cover="
+                + cover + "]";
     }
 
 }
