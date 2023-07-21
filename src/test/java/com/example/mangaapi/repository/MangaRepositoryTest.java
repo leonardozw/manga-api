@@ -102,8 +102,8 @@ public class MangaRepositoryTest {
 
     @Test
     public void listMangas_ReturnsMangas() {
-        Manga mangaOne = testEntityManager.merge(MANGA_ONE);
-        Manga mangaTwo = testEntityManager.merge(MANGA_TWO);
+        testEntityManager.merge(MANGA_ONE);
+        testEntityManager.merge(MANGA_TWO);
 
         List<Manga> mangas = mangaRepository.findAll();
 
