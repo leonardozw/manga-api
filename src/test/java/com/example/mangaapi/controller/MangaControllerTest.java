@@ -67,6 +67,13 @@ public class MangaControllerTest {
     }
 
     @Test
+    public void getManga_ByUnexistingId_ReturnsNotFound() throws Exception {
+        mockMvc.perform(
+                get("/mangas/1"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
     public void getManga_ByExistingName_ReturnsManga() throws Exception{
         when(mangaService.getByName(MANGA_ONE.getName())).thenReturn(Optional.of(MANGA_ONE));
 
@@ -74,6 +81,14 @@ public class MangaControllerTest {
                 get("/mangas/name/" + MANGA_ONE.getName()))
             .andExpect(status().isOk())
             .andExpect(content().json(objectMapper.writeValueAsString(MANGA_ONE)));;
+    }
+
+    @Test
+    public void getManga_ByUnexistingName_ReturnsNotFound() throws Exception {
+
+        mockMvc.perform(
+                get("/mangas/name/" + MANGA_ONE.getName()))
+                .andExpect(status().isNotFound());
     }
 
 }
