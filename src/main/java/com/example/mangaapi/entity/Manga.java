@@ -82,6 +82,9 @@ public class Manga {
         this.covers = covers;
     }
 
+    public Manga(Manga mangaOne) {
+    }
+
     public Long getId() {
         return id;
     }

@@ -27,6 +27,7 @@ public class MangaRepositoryTest {
     @AfterEach
     public void afterEach() {
         MANGA_ONE.setId(null);
+        MANGA_ONE.setVolumes(null);
     }
 
     @Test
@@ -58,7 +59,7 @@ public class MangaRepositoryTest {
 
     @Test
     public void createManga_WithExistingName_ThrowsException() {
-        Manga manga = testEntityManager.persistAndFlush(MANGA_ONE);
+        Manga manga = testEntityManager.merge(MANGA_ONE);
         testEntityManager.detach(manga);
         manga.setId(null);
 
@@ -67,7 +68,7 @@ public class MangaRepositoryTest {
 
     @Test
     public void getManga_ByExistingId_ReturnsManga() {
-        Manga manga = testEntityManager.persistAndFlush(MANGA_ONE);
+        Manga manga = testEntityManager.merge(MANGA_ONE);
 
         Optional<Manga> mangaOpt = mangaRepository.findById(manga.getId());
 
@@ -84,7 +85,7 @@ public class MangaRepositoryTest {
 
     @Test
     public void getManga_ByExistingName_ReturnsManga() {
-        Manga manga = testEntityManager.persistAndFlush(MANGA_ONE);
+        Manga manga = testEntityManager.merge(MANGA_ONE);
 
         Optional<Manga> mangaOpt = mangaRepository.findByName(manga.getName());
 
@@ -101,8 +102,8 @@ public class MangaRepositoryTest {
 
     @Test
     public void listMangas_ReturnsMangas() {
-        Manga mangaOne = testEntityManager.persistAndFlush(MANGA_ONE);
-        Manga mangaTwo = testEntityManager.persistAndFlush(MANGA_TWO);
+        Manga mangaOne = testEntityManager.merge(MANGA_ONE);
+        Manga mangaTwo = testEntityManager.merge(MANGA_TWO);
 
         List<Manga> mangas = mangaRepository.findAll();
 
