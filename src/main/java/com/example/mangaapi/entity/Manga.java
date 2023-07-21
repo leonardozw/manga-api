@@ -170,4 +170,11 @@ public class Manga {
         return EqualsBuilder.reflectionEquals(obj, this);
     }
 
+    @Override
+    public String toString() {
+        return "Manga [id=" + id + ", name=" + name + ", description=" + description + ", volumes=" + volumes
+                + ", status=" + status + ", author=" + author + ", publisher=" + publisher + ", dateReleased="
+                + dateReleased + ", dateAdded=" + dateAdded + ", covers=" + covers + "]";
+    }
+
 }

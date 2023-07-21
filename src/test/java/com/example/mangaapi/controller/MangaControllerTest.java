@@ -5,6 +5,8 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -52,6 +54,26 @@ public class MangaControllerTest {
                 post("/mangas").content(objectMapper.writeValueAsString(INVALID_MANGA))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
+    public void getManga_ByExistingId_ReturnsManga() throws Exception{
+        when(mangaService.getById(1L)).thenReturn(Optional.of(MANGA_ONE));
+        
+        mockMvc.perform(
+                get("/mangas/1"))
+            .andExpect(status().isOk())
+            .andExpect(content().json(objectMapper.writeValueAsString(MANGA_ONE)));;
+    }
+
+    @Test
+    public void getManga_ByExistingName_ReturnsManga() throws Exception{
+        when(mangaService.getByName(MANGA_ONE.getName())).thenReturn(Optional.of(MANGA_ONE));
+
+        mockMvc.perform(
+                get("/mangas/name/" + MANGA_ONE.getName()))
+            .andExpect(status().isOk())
+            .andExpect(content().json(objectMapper.writeValueAsString(MANGA_ONE)));;
     }
 
 }

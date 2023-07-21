@@ -47,6 +47,12 @@ public class MangaController {
         return ResponseEntity.ok(mangas);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Manga> getById(@PathVariable("id") Long id) {
+        return mangaService.getById(id).map(manga -> ResponseEntity.ok(manga))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
     @GetMapping("/name/{name}")
     public ResponseEntity<Manga> getByName(@PathVariable("name") String name) {
         return mangaService.getByName(name).map(manga -> ResponseEntity.ok(manga))
