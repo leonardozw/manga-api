@@ -1,10 +1,12 @@
 package com.example.mangaapi.controller;
 
 import static com.example.mangaapi.common.MangaConstants.*;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import java.util.Collections;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -89,6 +91,26 @@ public class MangaControllerTest {
         mockMvc.perform(
                 get("/mangas/name/" + MANGA_ONE.getName()))
                 .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void listMangas_ReturnsMangas() throws Exception{
+        when(mangaService.list()).thenReturn(VALID_MANGAS);
+
+        mockMvc.perform(
+            get("/mangas"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$", hasSize(2)));
+    }
+
+    @Test
+    public void listMangas_ReturnsNoMangas() throws Exception{
+        when(mangaService.list()).thenReturn(Collections.EMPTY_LIST);
+
+        mockMvc.perform(
+            get("/mangas"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$", hasSize(0)));
     }
 
 }
