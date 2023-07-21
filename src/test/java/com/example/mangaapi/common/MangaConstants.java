@@ -3,6 +3,7 @@ package com.example.mangaapi.common;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import com.example.mangaapi.entity.Manga;
@@ -12,6 +13,14 @@ public class MangaConstants {
 
         public static final LocalDateTime DATE_ONE = LocalDateTime.of(2023, 7, 1, 12, 0);
         public static final LocalDateTime DATE_TWO = LocalDateTime.of(2023, 8, 15, 15, 30);
+
+        public static final Volume VOLUME_ONE = new Volume(
+                        null,
+                        1,
+                        "Volume One",
+                        null,
+                        null,
+                        "Volume One Cover");
 
         public static final Manga MANGA_ONE = new Manga(
                         "Manga One",
@@ -44,6 +53,17 @@ public class MangaConstants {
                         null,
                         null,
                         null);
+        public static final Manga EXPECTED_MANGA = new Manga(
+                        1L,
+                        "One Piece",
+                        "Adventure",
+                        Collections.singletonList(VOLUME_ONE),
+                        "ongoing",
+                        "Eiichiro Oda",
+                        "Shonen Jump",
+                        null,
+                        null,
+                        null);
         public static final List<Manga> VALID_MANGAS = Arrays.asList(MANGA_ONE, MANGA_TWO);
 
         public static final Manga INVALID_MANGA = new Manga(
@@ -57,9 +77,4 @@ public class MangaConstants {
                         null,
                         null);
 
-        public static final Volume VOLUME_ONE = new Volume(
-                        1,
-                        null,
-                        null,
-                        "Volume One Cover");
 }

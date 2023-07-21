@@ -2,6 +2,8 @@ package com.example.mangaapi.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
@@ -21,9 +24,12 @@ public class Volume {
     private Long id;
     @NotNull
     private int issue;
+    @NotEmpty
+    private String title;
 
     @ManyToOne
     @JoinColumn(name = "manga_id")
+    @JsonIgnore
     private Manga manga;
 
     @OneToMany(mappedBy = "volume", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -33,8 +39,19 @@ public class Volume {
     public Volume() {
     }
 
-    public Volume(int issue, Manga manga, List<Chapter> chapters, String cover) {
+    public Volume(Long id, @NotNull int issue, @NotEmpty String title, Manga manga, List<Chapter> chapters,
+            String cover) {
+        this.id = id;
         this.issue = issue;
+        this.title = title;
+        this.manga = manga;
+        this.chapters = chapters;
+        this.cover = cover;
+    }
+
+    public Volume(@NotNull int issue, @NotEmpty String title, Manga manga, List<Chapter> chapters, String cover) {
+        this.issue = issue;
+        this.title = title;
         this.manga = manga;
         this.chapters = chapters;
         this.cover = cover;
@@ -54,6 +71,14 @@ public class Volume {
 
     public void setIssue(int issue) {
         this.issue = issue;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Manga getManga() {
@@ -82,8 +107,8 @@ public class Volume {
 
     @Override
     public String toString() {
-        return "Volume [id=" + id + ", issue=" + issue + ", manga=" + manga + ", chapters=" + chapters + ", cover="
-                + cover + "]";
+        return "Volume [id=" + id + ", issue=" + issue + ", title=" + title + ", manga=" + manga + ", chapters="
+                + chapters + ", cover=" + cover + "]";
     }
 
 }
