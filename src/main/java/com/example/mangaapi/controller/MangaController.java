@@ -68,6 +68,11 @@ public class MangaController {
     @DeleteMapping("{id}")
     public ResponseEntity<List<Manga>> delete(@PathVariable("id") Long id) {
         List<Manga> updatedMangaList = mangaService.delete(id);
-        return ResponseEntity.ok(updatedMangaList);
+
+        if (updatedMangaList.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(updatedMangaList);
+        }
     }
 }

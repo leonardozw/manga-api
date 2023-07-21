@@ -6,13 +6,16 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -128,7 +131,7 @@ public class MangaControllerTest {
         }
 
         @Test
-        public void addVolume_WithInvalidArguments_ReturnsManga() throws Exception {
+        public void addVolume_WithInvalidArguments_ReturnsBadRequest() throws Exception {
                 Volume emptyVolume = new Volume();
 
                 mockMvc.perform(post("/mangas/" + 1L + "/add")
@@ -136,6 +139,26 @@ public class MangaControllerTest {
                                 .contentType(MediaType.APPLICATION_JSON))
                                 .andExpect(status().isUnprocessableEntity());
 
+        }
+
+        @Test
+        public void removeManga_WithExistingId_ReturnsNoContent() throws Exception {
+                List<Manga> updatedMangas = new ArrayList<>();
+
+                when(mangaService.delete(1L)).thenReturn(updatedMangas);
+
+                mockMvc.perform(delete("/mangas/1"))
+                                .andExpect(status().isNoContent());
+        }
+
+        @Test
+        public void removeManga_WithUnexistingId_ReturnsNoContent() throws Exception {
+                final Long mangaId = 1L;
+
+                doThrow(new EmptyResultDataAccessException(1)).when(mangaService).delete(mangaId);
+
+                mockMvc.perform(delete("/mangas/" + mangaId))
+                                .andExpect(status().isNotFound());
         }
 
 }
