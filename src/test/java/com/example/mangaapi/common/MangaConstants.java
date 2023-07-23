@@ -64,6 +64,17 @@ public class MangaConstants {
                         null,
                         null,
                         null);
+        public static final Manga IT_MANGA = new Manga(
+                        1L,
+                        "One Piece",
+                        "Aventura e ação",
+                        new ArrayList<>(),
+                        "Ongoing",
+                        "Eiichiro Oda",
+                        "Shonen Jump",
+                        LocalDateTime.of(2023, 1, 1, 0, 0, 0),
+                        LocalDateTime.of(2023, 7, 21, 12, 0, 0),
+                        Collections.emptyList());
         public static final List<Manga> VALID_MANGAS = Arrays.asList(MANGA_ONE, MANGA_TWO);
 
         public static final Manga INVALID_MANGA = new Manga(
