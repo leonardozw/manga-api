@@ -10,6 +10,8 @@ import com.example.mangaapi.entity.Manga;
 import com.example.mangaapi.entity.Volume;
 import com.example.mangaapi.repository.MangaRepository;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class MangaService {
 
@@ -47,7 +49,7 @@ public class MangaService {
 
     public Manga addVolume(Long id, Volume volume) {
         Optional<Manga> optManga = mangaRepository.findById(id);
-        Manga manga = optManga.get();
+        Manga manga = optManga.orElseThrow(() -> new EntityNotFoundException());
         volume.setManga(manga);
         manga.getVolumes().add(0, volume);
         return mangaRepository.save(manga);

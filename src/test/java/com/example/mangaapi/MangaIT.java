@@ -15,6 +15,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 
 import com.example.mangaapi.entity.Manga;
+import com.example.mangaapi.entity.Volume;
 
 @ActiveProfiles("it")
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -26,7 +27,7 @@ public class MangaIT {
     private TestRestTemplate restTemplate;
 
     @Test
-    public void createManga_ReturnsCreated() {
+    public void createManga_WithValidData_ReturnsCreated() {
         ResponseEntity<Manga> sut = restTemplate.postForEntity("/mangas", MANGA_ONE, Manga.class);
 
         assertThat(sut.getStatusCode()).isEqualTo(HttpStatus.CREATED);
@@ -43,10 +44,64 @@ public class MangaIT {
     }
 
     @Test
-    public void getManga_ReturnsManga() {
+    public void createManga_WithInvalidData_ReturnsBadRequest() {
+        ResponseEntity<Manga> sut = restTemplate.postForEntity("/mangas", INVALID_MANGA, Manga.class);
+
+        assertThat(sut.getStatusCode()).isEqualTo(HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
+    @Test
+    public void getManga_ByExistingId_ReturnsManga() {
         ResponseEntity<Manga> sut = restTemplate.getForEntity("/mangas/1", Manga.class);
+
         assertThat(sut.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(sut.getBody()).isEqualTo(IT_MANGA);
+    }
+
+    @Test
+    public void getManga_ByUnexistingId_ReturnsNotFound() {
+        ResponseEntity<Manga> sut = restTemplate.getForEntity("/mangas/99", Manga.class);
+
+        assertThat(sut.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+    }
+
+    @Test
+    public void getManga_ByExistingName_ReturnsManga() {
+        ResponseEntity<Manga> sut = restTemplate.getForEntity("/mangas/name/" + IT_MANGA.getName(), Manga.class);
+
+        assertThat(sut.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(sut.getBody()).isEqualTo(IT_MANGA);
+    }
+
+    @Test
+    public void getManga_ByUnexistingName_ReturnsNotFound() {
+        ResponseEntity<Manga> sut = restTemplate.getForEntity("/mangas/name/test", Manga.class);
+
+        assertThat(sut.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+    }
+
+    @Test
+    public void listMangas_ReturnsMangas() {
+        ResponseEntity<Manga[]> sut = restTemplate.getForEntity("/mangas", Manga[].class);
+
+        assertThat(sut.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(sut.getBody()).hasSize(3);
+    }
+
+    @Test
+    public void addVolume_WithExistingMangaAndValidVolume_ReturnsManga() {
+        ResponseEntity<Manga> sut = restTemplate.postForEntity("/mangas/1/add", VOLUME_ONE, Manga.class);
+
+        assertThat(sut.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(sut.getBody().getVolumes()).isNotNull();
+    }
+
+    @Test
+    public void addVolume_WithInvalidData_ReturnsNotFound() {
+        Volume volume = new Volume();
+        ResponseEntity<Manga> sut = restTemplate.postForEntity("/mangas/1/add", volume, Manga.class);
+
+        assertThat(sut.getStatusCode()).isEqualTo(HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
 }

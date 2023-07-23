@@ -51,7 +51,6 @@ public class MangaControllerTest {
         public void createManga_WithInvalidData_ReturnsBadRequest() throws Exception {
                 Manga emptyManga = new Manga();
 
-                // when(mangaService.create(MANGA_ONE)).thenReturn(MANGA_ONE);
                 mockMvc.perform(
                                 post("/mangas").content(objectMapper.writeValueAsString(emptyManga))
                                                 .contentType(MediaType.APPLICATION_JSON))
@@ -129,6 +128,21 @@ public class MangaControllerTest {
                                 .contentType(MediaType.APPLICATION_JSON))
                                 .andExpect(status().isOk());
         }
+
+        /*
+         * @Test
+         * public void addVolume_WithUnexistingManga_ReturnsManga() throws Exception {
+         * Volume volume = VOLUME_ONE;
+         * 
+         * when(mangaService.addVolume(99L, volume)).thenThrow(new
+         * EntityNotFoundException());
+         * 
+         * mockMvc.perform(post("/mangas/" + 99L + "/add")
+         * .content(objectMapper.writeValueAsString(volume))
+         * .contentType(MediaType.APPLICATION_JSON))
+         * .andExpect(status().isNotFound());
+         * }
+         */
 
         @Test
         public void addVolume_WithInvalidArguments_ReturnsBadRequest() throws Exception {
