@@ -129,21 +129,6 @@ public class MangaControllerTest {
                                 .andExpect(status().isOk());
         }
 
-        /*
-         * @Test
-         * public void addVolume_WithUnexistingManga_ReturnsManga() throws Exception {
-         * Volume volume = VOLUME_ONE;
-         * 
-         * when(mangaService.addVolume(99L, volume)).thenThrow(new
-         * EntityNotFoundException());
-         * 
-         * mockMvc.perform(post("/mangas/" + 99L + "/add")
-         * .content(objectMapper.writeValueAsString(volume))
-         * .contentType(MediaType.APPLICATION_JSON))
-         * .andExpect(status().isNotFound());
-         * }
-         */
-
         @Test
         public void addVolume_WithInvalidArguments_ReturnsBadRequest() throws Exception {
                 Volume emptyVolume = new Volume();

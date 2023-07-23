@@ -49,9 +49,13 @@ public class MangaService {
 
     public Manga addVolume(Long id, Volume volume) {
         Optional<Manga> optManga = mangaRepository.findById(id);
-        Manga manga = optManga.orElseThrow(() -> new EntityNotFoundException());
-        volume.setManga(manga);
-        manga.getVolumes().add(0, volume);
-        return mangaRepository.save(manga);
+        if (optManga.isPresent()) {
+            Manga manga = optManga.get();
+            volume.setManga(manga);
+            manga.getVolumes().add(0, volume);
+            return mangaRepository.save(manga);
+        } else {
+            throw new EntityNotFoundException();
+        }
     }
 }

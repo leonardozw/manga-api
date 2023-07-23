@@ -35,7 +35,7 @@ Content-Type: application/json
 }
 
 ### ADD Volume ###
-POST http://localhost:8080/mangas/1/add
+POST http://localhost:8080/mangas/2/add
 Content-Type: application/json
 
 {

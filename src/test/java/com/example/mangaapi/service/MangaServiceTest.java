@@ -19,6 +19,8 @@ import org.springframework.data.domain.Sort;
 import com.example.mangaapi.entity.Manga;
 import com.example.mangaapi.repository.MangaRepository;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @ExtendWith(MockitoExtension.class)
 public class MangaServiceTest {
 
@@ -151,9 +153,9 @@ public class MangaServiceTest {
     }
 
     @Test
-    public void addVolume_WithoutExistingManga_ThrowsException() {
-        when(mangaRepository.findById(1L)).thenThrow(RuntimeException.class);
-        assertThatThrownBy(() -> mangaService.addVolume(1L, VOLUME_ONE)).isInstanceOf(RuntimeException.class);
+    public void addVolume_WitUnexistingManga_ThrowsException() {
+        when(mangaRepository.findById(1L)).thenThrow(EntityNotFoundException.class);
+        assertThatThrownBy(() -> mangaService.addVolume(1L, VOLUME_ONE)).isInstanceOf(EntityNotFoundException.class);
     }
 
     @Test
