@@ -3,11 +3,15 @@ package com.example.mangaapi;
 import static com.example.mangaapi.common.MangaConstants.*;
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
@@ -110,6 +114,16 @@ public class MangaIT {
         ResponseEntity<Manga> sut = restTemplate.postForEntity("/mangas/99/add", volume, Manga.class);
 
         assertThat(sut.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+    }
+
+    @Test
+    public void removeManga_ReturnsMangas() {
+        ResponseEntity<List<Manga>> sut = restTemplate.exchange("/mangas/1", HttpMethod.DELETE, null,
+                new ParameterizedTypeReference<List<Manga>>() {
+                });
+
+        assertThat(sut.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(sut.getBody()).hasSize(2);
     }
 
 }
