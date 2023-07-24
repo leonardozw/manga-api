@@ -21,12 +21,9 @@ public class VolumeService {
 
     private MangaRepository mangaRepository;
 
-    public VolumeService(MangaRepository mangaRepository) {
-        this.mangaRepository = mangaRepository;
-    }
-
-    public VolumeService(VolumeRepository volumeRepository) {
+    public VolumeService(VolumeRepository volumeRepository, MangaRepository mangaRepository) {
         this.volumeRepository = volumeRepository;
+        this.mangaRepository = mangaRepository;
     }
 
     public Volume create(Volume volume) {
@@ -43,6 +40,10 @@ public class VolumeService {
         } else {
             throw new EntityNotFoundException();
         }
+    }
+
+    public List<Volume> getAll() {
+        return volumeRepository.findAll();
     }
 
     public Optional<Volume> getById(Long id) {

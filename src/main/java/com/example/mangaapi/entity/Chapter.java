@@ -2,6 +2,8 @@ package com.example.mangaapi.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -29,6 +31,7 @@ public class Chapter {
 
     @ManyToOne
     @JoinColumn(name = "volume_id")
+    @JsonIgnore
     private Volume volume;
 
     public Chapter() {

@@ -35,13 +35,13 @@ Content-Type: application/json
 }
 
 ### ADD Volume ###
-POST http://localhost:8080/mangas/2/add
+POST http://localhost:8080/mangas/add/1
 Content-Type: application/json
 
 {
-    "issue": 1,
-    "title": "Volume Two",
-    "cover": "Volume Two Cover"
+    "issue": 2,
+    "title": "Volume Three",
+    "cover": "Volume Three Cover"
 }
 
 ### Delete Manga ###

@@ -1,0 +1,46 @@
+### CREATE ###
+POST http://localhost:8080/volumes
+Content-Type: application/json
+
+{
+    "issue": 1,
+    "title": "Volume Test",
+    "cover": "volumeone.png"
+}
+### ADD CHAPTER ###
+POST http://localhost:8080/volumes/add/5
+Content-Type: application/json
+
+{
+    "name": "Chapter 1",
+    "chapterNumber": 1,
+    "pages": [
+        "page1.jpg",
+        "page2.jpg",
+        "page3.jpg"
+    ]
+}
+
+### GET ALL ###
+GET http://localhost:8080/volumes
+
+### GET BY ID ###
+GET http://localhost:8080/volumes/2
+
+### GET BY TITLE ###
+GET http://localhost:8080/volumes/title/{title}
+
+### GET BY MANGA ID ###
+GET http://localhost:8080/volumes/manga/1
+
+### UPDATE ###
+PUT http://localhost:8080/volumes
+Content-Type: application/json
+
+{
+    "issue": 1,
+    "title": "Volume Test",
+    "cover": "volumeone.png"
+}
+### DELETE ###
+DELETE http://localhost:8080/volumes/6
