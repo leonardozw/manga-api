@@ -44,7 +44,6 @@ public class MangaIT {
         assertThat(sut.getBody().getPublisher()).isEqualTo(MANGA_ONE.getPublisher());
         assertThat(sut.getBody().getDateReleased()).isEqualTo(MANGA_ONE.getDateReleased());
         assertThat(sut.getBody().getDateAdded()).isEqualTo(MANGA_ONE.getDateAdded());
-        assertThat(sut.getBody().getCovers()).isEqualTo(MANGA_ONE.getCovers());
     }
 
     @Test

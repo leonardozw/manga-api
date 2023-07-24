@@ -45,7 +45,6 @@ public class MangaRepositoryTest {
         assertThat(sut.getPublisher()).isEqualTo(MANGA_ONE.getPublisher());
         assertThat(sut.getDateReleased()).isEqualTo(MANGA_ONE.getDateReleased());
         assertThat(sut.getDateAdded()).isEqualTo(MANGA_ONE.getDateAdded());
-        assertThat(sut.getCovers()).isEqualTo(MANGA_ONE.getCovers());
     }
 
     @Test

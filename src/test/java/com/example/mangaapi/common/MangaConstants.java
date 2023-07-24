@@ -30,8 +30,7 @@ public class MangaConstants {
                         "Author One",
                         "Publisher One",
                         DATE_ONE,
-                        DATE_TWO,
-                        null);
+                        DATE_TWO);
         public static final Manga MANGA_TWO = new Manga(
                         "Manga Two",
                         "Description Two",
@@ -40,8 +39,7 @@ public class MangaConstants {
                         "Author Two",
                         "Publisher Two",
                         DATE_ONE,
-                        DATE_TWO,
-                        null);
+                        DATE_TWO);
         public static final Manga UPDATE_MANGA = new Manga(
                         1L,
                         "One Piece",
@@ -50,7 +48,6 @@ public class MangaConstants {
                         "ongoing",
                         "Eiichiro Oda",
                         "Shonen Jump",
-                        null,
                         null,
                         null);
         public static final Manga EXPECTED_MANGA = new Manga(
@@ -62,7 +59,6 @@ public class MangaConstants {
                         "Eiichiro Oda",
                         "Shonen Jump",
                         null,
-                        null,
                         null);
         public static final Manga IT_MANGA = new Manga(
                         1L,
@@ -73,8 +69,7 @@ public class MangaConstants {
                         "Eiichiro Oda",
                         "Shonen Jump",
                         LocalDateTime.of(2023, 1, 1, 0, 0, 0),
-                        LocalDateTime.of(2023, 7, 21, 12, 0, 0),
-                        Collections.emptyList());
+                        LocalDateTime.of(2023, 7, 21, 12, 0, 0));
         public static final List<Manga> VALID_MANGAS = Arrays.asList(MANGA_ONE, MANGA_TWO);
 
         public static final Manga INVALID_MANGA = new Manga(
@@ -84,7 +79,6 @@ public class MangaConstants {
                         "",
                         "",
                         "",
-                        null,
                         null,
                         null);
 

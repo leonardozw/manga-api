@@ -6,17 +6,13 @@ import java.util.List;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 
 @Entity
@@ -45,17 +41,12 @@ public class Manga {
     private LocalDateTime dateReleased;
     private LocalDateTime dateAdded;
 
-    @ElementCollection
-    @CollectionTable(name = "manga_covers", joinColumns = @JoinColumn(name = "manga_id"))
-    @Column(name = "cover")
-    private List<String> covers;
-
     public Manga() {
     }
 
-    public Manga(Long id, @NotBlank String name, @NotBlank String description, List<Volume> volumes,
-            @NotBlank String status, @NotBlank String author, @NotBlank String publisher, LocalDateTime dateReleased,
-            LocalDateTime dateAdded, List<String> covers) {
+    public Manga(Long id, @NotEmpty String name, @NotEmpty String description, List<Volume> volumes,
+            @NotEmpty String status, @NotEmpty String author, @NotEmpty String publisher, LocalDateTime dateReleased,
+            LocalDateTime dateAdded) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -65,12 +56,10 @@ public class Manga {
         this.publisher = publisher;
         this.dateReleased = dateReleased;
         this.dateAdded = dateAdded;
-        this.covers = covers;
     }
 
-    public Manga(@NotBlank String name, @NotBlank String description, List<Volume> volumes, @NotBlank String status,
-            @NotBlank String author, @NotBlank String publisher, LocalDateTime dateReleased, LocalDateTime dateAdded,
-            List<String> covers) {
+    public Manga(@NotEmpty String name, @NotEmpty String description, List<Volume> volumes, @NotEmpty String status,
+            @NotEmpty String author, @NotEmpty String publisher, LocalDateTime dateReleased, LocalDateTime dateAdded) {
         this.name = name;
         this.description = description;
         this.volumes = volumes;
@@ -79,7 +68,6 @@ public class Manga {
         this.publisher = publisher;
         this.dateReleased = dateReleased;
         this.dateAdded = dateAdded;
-        this.covers = covers;
     }
 
     public Manga(Manga mangaOne) {
@@ -157,14 +145,6 @@ public class Manga {
         this.dateAdded = dateAdded;
     }
 
-    public List<String> getCovers() {
-        return covers;
-    }
-
-    public void setCovers(List<String> covers) {
-        this.covers = covers;
-    }
-
     @Override
     public boolean equals(Object obj) {
         return EqualsBuilder.reflectionEquals(obj, this);
@@ -174,7 +154,7 @@ public class Manga {
     public String toString() {
         return "Manga [id=" + id + ", name=" + name + ", description=" + description + ", volumes=" + volumes
                 + ", status=" + status + ", author=" + author + ", publisher=" + publisher + ", dateReleased="
-                + dateReleased + ", dateAdded=" + dateAdded + ", covers=" + covers + "]";
+                + dateReleased + ", dateAdded=" + dateAdded + "]";
     }
 
 }
