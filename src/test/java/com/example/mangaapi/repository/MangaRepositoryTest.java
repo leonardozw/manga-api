@@ -111,7 +111,7 @@ public class MangaRepositoryTest {
     }
 
     @Test
-    public void listMagas_ReturnsNoPlanets() {
+    public void listMangas_ReturnsNoPlanets() {
         List<Manga> mangas = mangaRepository.findAll();
 
         assertThat(mangas).isEmpty();

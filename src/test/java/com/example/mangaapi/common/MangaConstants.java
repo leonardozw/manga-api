@@ -106,7 +106,9 @@ public class MangaConstants {
                         null,
                         null);
 
-        public static final Volume INVALID_VOLUME = new Volume();
+        public static final Volume INVALID_VOLUME = new Volume(
+
+        );
 
         public static final Chapter INVALID_CHAPTER = new Chapter();
 
