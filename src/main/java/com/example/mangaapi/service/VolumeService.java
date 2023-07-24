@@ -70,7 +70,6 @@ public class VolumeService {
 
     public List<Volume> delete(Long id) {
         volumeRepository.deleteById(id);
-        return listByMangaId(id);
+        return getAll();
     }
-
 }
