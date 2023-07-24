@@ -93,7 +93,7 @@ public class MangaIT {
 
     @Test
     public void addVolume_WithExistingMangaAndValidVolume_ReturnsManga() {
-        ResponseEntity<Manga> sut = restTemplate.postForEntity("/mangas/1/add", VOLUME_ONE, Manga.class);
+        ResponseEntity<Manga> sut = restTemplate.postForEntity("/mangas/add/1", VOLUME_ONE, Manga.class);
 
         assertThat(sut.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(sut.getBody().getVolumes()).isNotNull();
@@ -102,7 +102,7 @@ public class MangaIT {
     @Test
     public void addVolume_WithInvalidData_ReturnsBadRequest() {
         Volume volume = new Volume();
-        ResponseEntity<Manga> sut = restTemplate.postForEntity("/mangas/1/add", volume, Manga.class);
+        ResponseEntity<Manga> sut = restTemplate.postForEntity("/mangas/add/1", volume, Manga.class);
 
         assertThat(sut.getStatusCode()).isEqualTo(HttpStatus.UNPROCESSABLE_ENTITY);
     }
@@ -110,7 +110,7 @@ public class MangaIT {
     @Test
     public void addVolume_WithUnexistingManga_ReturnsNotFound() {
         Volume volume = VOLUME_ONE;
-        ResponseEntity<Manga> sut = restTemplate.postForEntity("/mangas/99/add", volume, Manga.class);
+        ResponseEntity<Manga> sut = restTemplate.postForEntity("/mangas/add/99", volume, Manga.class);
 
         assertThat(sut.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
     }

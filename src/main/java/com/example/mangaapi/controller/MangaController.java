@@ -35,7 +35,7 @@ public class MangaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(mangaCreated);
     }
 
-    @PostMapping("/{id}/add")
+    @PostMapping("/add/{id}")
     public ResponseEntity<Manga> addVolume(@PathVariable("id") Long id, @RequestBody @Valid Volume volume) {
         Manga mangaUpdated = mangaService.addVolume(id, volume);
         return ResponseEntity.ok(mangaUpdated);

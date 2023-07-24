@@ -123,7 +123,7 @@ public class MangaControllerTest {
 
                 when(mangaService.addVolume(manga.getId(), volume)).thenReturn(EXPECTED_MANGA);
 
-                mockMvc.perform(post("/mangas/" + manga.getId() + "/add")
+                mockMvc.perform(post("/mangas/add/" + manga.getId())
                                 .content(objectMapper.writeValueAsString(volume))
                                 .contentType(MediaType.APPLICATION_JSON))
                                 .andExpect(status().isOk());
@@ -133,7 +133,7 @@ public class MangaControllerTest {
         public void addVolume_WithInvalidArguments_ReturnsBadRequest() throws Exception {
                 Volume emptyVolume = new Volume();
 
-                mockMvc.perform(post("/mangas/" + 1L + "/add")
+                mockMvc.perform(post("/mangas/add/" + 1L)
                                 .content(objectMapper.writeValueAsString(emptyVolume))
                                 .contentType(MediaType.APPLICATION_JSON))
                                 .andExpect(status().isUnprocessableEntity());
