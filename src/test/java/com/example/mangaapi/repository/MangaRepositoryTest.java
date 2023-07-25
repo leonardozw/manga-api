@@ -119,7 +119,7 @@ public class MangaRepositoryTest {
 
     @Test
     public void removeManga_WithExistingId_RemovesMangaFromDatabase() {
-        Manga manga = testEntityManager.persistAndFlush(MANGA_ONE);
+        Manga manga = testEntityManager.merge(MANGA_ONE);
 
         mangaRepository.deleteById(manga.getId());
 

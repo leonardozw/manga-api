@@ -138,18 +138,13 @@ public class MangaServiceTest {
 
     @Test
     public void addVolume_WithValidArguments_ReturnsManga() {
-        Manga manga = MANGA_ONE;
-
-        when(mangaRepository.save(manga)).thenReturn(manga);
-
-        mangaService.create(manga);
-
+        Manga manga = MANGA_TWO;
         when(mangaRepository.findById(1L)).thenReturn(Optional.of(manga));
+        when(mangaRepository.save(manga)).thenReturn(EXPECTED_MANGA);
 
         Manga sut = mangaService.addVolume(1L, VOLUME_ONE);
 
-        assertThat(sut).isNotNull();
-        assertThat(sut.getVolumes()).isEqualTo(manga.getVolumes());
+        assertThat(sut).isEqualTo(EXPECTED_MANGA);
     }
 
     @Test
