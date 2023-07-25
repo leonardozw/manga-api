@@ -62,11 +62,15 @@ public class VolumeController {
     @GetMapping("/manga/{id}")
     public ResponseEntity<List<Volume>> list(@PathVariable("id") Long id) {
         List<Volume> volumes = volumeService.listByMangaId(id);
-        return ResponseEntity.ok(volumes);
+        if (volumes.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(volumes);
+        }
     }
 
     @PutMapping
-    public ResponseEntity<Volume> update(@RequestBody Volume volume) {
+    public ResponseEntity<Volume> update(@RequestBody @Valid Volume volume) {
         Volume volumeUpdated = volumeService.update(volume);
         return ResponseEntity.ok(volumeUpdated);
     }

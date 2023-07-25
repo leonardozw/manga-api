@@ -48,7 +48,7 @@ public class MangaControllerTest {
         }
 
         @Test
-        public void createManga_WithInvalidData_ReturnsBadRequest() throws Exception {
+        public void createManga_WithInvalidData_ReturnsUnpocessableEntity() throws Exception {
                 Manga emptyManga = new Manga();
 
                 mockMvc.perform(
@@ -137,7 +137,34 @@ public class MangaControllerTest {
                                 .content(objectMapper.writeValueAsString(emptyVolume))
                                 .contentType(MediaType.APPLICATION_JSON))
                                 .andExpect(status().isUnprocessableEntity());
+        }
 
+        @Test
+        public void updateManga_WithValidData_ReturnsOk() throws Exception {
+
+                Manga manga = MANGA_ONE;
+                manga.setId(1L);
+
+                when(mangaService.update(manga)).thenReturn(manga);
+
+                mockMvc.perform(put("/mangas")
+                                .content(objectMapper.writeValueAsString(manga))
+                                .contentType(MediaType.APPLICATION_JSON))
+                                .andExpect(status().isOk());
+        }
+
+        @Test
+        public void updateManga_WithInvalidData_ReturnsBadRequest() throws Exception {
+
+                Manga manga = new Manga();
+                manga.setId(1L);
+
+                when(mangaService.update(manga)).thenReturn(manga);
+
+                mockMvc.perform(put("/mangas")
+                                .content(objectMapper.writeValueAsString(manga))
+                                .contentType(MediaType.APPLICATION_JSON))
+                                .andExpect(status().isUnprocessableEntity());
         }
 
         @Test

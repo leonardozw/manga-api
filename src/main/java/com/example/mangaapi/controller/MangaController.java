@@ -60,7 +60,7 @@ public class MangaController {
     }
 
     @PutMapping
-    public ResponseEntity<Manga> update(@RequestBody Manga manga) {
+    public ResponseEntity<Manga> update(@RequestBody @Valid Manga manga) {
         Manga updatedManga = mangaService.update(manga);
         return ResponseEntity.ok(updatedManga);
     }

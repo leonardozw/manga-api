@@ -57,10 +57,10 @@ public class VolumeService {
     public List<Volume> listByMangaId(Long id) {
         Sort sort = Sort.by(Sort.Direction.ASC, "issue");
         Optional<Manga> optManga = mangaRepository.findById(id);
-        if (optManga.isPresent()) {
-            return volumeRepository.findAllByManga(optManga.get(), sort);
-        } else {
+        if (!optManga.isPresent()) {
             throw new EntityNotFoundException();
+        } else {
+            return volumeRepository.findAllByManga(optManga.get(), sort);
         }
     }
 

@@ -96,7 +96,7 @@ public class VolumeRepositoryTest {
 
     @Test
     public void getVolume_ByExistingTitle_ReturnsVolume() {
-        Volume vol = testEntityManager.merge(VOLUME_ONE);
+        Volume vol = testEntityManager.merge(VOLUME_TWO);
         Optional<Volume> volume = volumeRepository.findByTitle(vol.getTitle());
 
         assertThat(volume).isNotEmpty();
