@@ -14,6 +14,17 @@
 - Mockito
 - AssertJ
 
+## Metodologias e Práticas:
+
+!!! As metodologias e práticas abaixo serviram como inspiração e base para o desenvolvimento do projeto, porém em algum ponto do código posso não ter seguido os padrões da forma correta, afinal nesse momento ainda estou aprendendo essas práticas e metodologias :D !!!
+
+- TDD
+- XP
+- SOLID
+- DRY
+- YAGNI
+- KISS
+
 ## Como Executar:
 
 ### !!! requer mysql server instalado na máquina !!!
@@ -50,3 +61,19 @@ java -jar target/manga-api-0.0.1-SNAPSHOT.jar
 A api poderá ser acessada em [localhost:8080](http://localhost:8080)
 
 O Swagger poderá ser vizualizado em [localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+
+## Execução dos Testes:
+
+- Executando os testes de unidade/componentes:
+
+```
+mvn test
+```
+
+- Executando os testes de integração/e2e:
+
+```
+mvn test -Dtest=MangaIT
+
+mvn test -Dtest=VolumeIT
+```
