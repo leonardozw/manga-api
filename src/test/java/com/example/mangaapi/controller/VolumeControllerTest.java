@@ -46,7 +46,7 @@ public class VolumeControllerTest {
         }
 
         @Test
-        public void createVolume_WithInvalidData_ReturnsUnpocessableEntity() throws Exception {
+        public void createVolume_WithInvalidData_ReturnsUnprocessableEntity() throws Exception {
                 Volume emptyVolume = new Volume();
 
                 mockMvc.perform(

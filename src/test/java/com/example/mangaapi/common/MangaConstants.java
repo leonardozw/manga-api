@@ -36,6 +36,13 @@ public class MangaConstants {
                         null,
                         new ArrayList<>(),
                         "Volume Two Cover");
+
+        public static final Volume IT_VOLUME = new Volume(
+                        1L,
+                        1,
+                        "Volume One",
+                        null, null, "image1.png");
+
         public static final Volume EXPECTED_VOLUME = new Volume(
                         1L,
                         1,

@@ -47,7 +47,7 @@ public class MangaIT {
     }
 
     @Test
-    public void createManga_WithInvalidData_ReturnsBadRequest() {
+    public void createManga_WithInvalidData_ReturnsUnprocessableEntity() {
         ResponseEntity<Manga> sut = restTemplate.postForEntity("/mangas", INVALID_MANGA, Manga.class);
 
         assertThat(sut.getStatusCode()).isEqualTo(HttpStatus.UNPROCESSABLE_ENTITY);
